@@ -46,8 +46,10 @@ sessions controller
         - if it finds the user and authenticates the password 
             - add user id to session
             - redirect_to user_url(@user)
+        - redirect if user not found to login page
 
 - destroy
+    - removes :user_id from session 
 
 So far I have created my welcome page and made sure that it is rendering in my layout. I have added links to my welcome page that give the user the option to sign in but they are undefined at this point so the view is not rendering.
 

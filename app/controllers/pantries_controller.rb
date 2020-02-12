@@ -1,0 +1,2 @@
+class PantriesController < ApplicationRecord
+end

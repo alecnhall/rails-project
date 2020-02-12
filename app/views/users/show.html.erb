@@ -1,16 +1,13 @@
-<h1> Welcome, <%= @user.username %> </h1>
+<h1 class="center"> Welcome, <%= @user.username %>! </h1>
 
-<h2> Whats In Your Pantry? </h2>
+<h2> What's In Your Pantry? </h2>
 
-<table>
-    <thead>
-        <th> Name </th>
-        <th> Quantity </th>
-    </thead>
-    <tr>
-        ; ruby function
-        <td> item.name </td>
-        <td> Item Quantity </td>
-        ; end of ruby function
-    </tr>
-</table>
+<div>
+<% if @user.pantry.items.empty? %>
+    <h4> There are currently no items in your pantry. Click the link below to add items. </h4>
+    <%= link_to 'Add Items To Pantry', new_item_path %>
+<% else %>
+    <%= render partial: 'pantry/pantry' %>
+    <%= link_to 'Add Items To Pantry', new_item_path %>
+<% end %>
+</div>

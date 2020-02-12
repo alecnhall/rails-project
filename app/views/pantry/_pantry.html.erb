@@ -1,0 +1,14 @@
+<table class="center">
+    <thead>
+        <th> Name </th>
+        <th> Amount </th>
+        <th> Options </th>
+    </thead>
+    <% current_user.pantry.items.each do |item| %>
+        <tr>
+            <td> <%= item.name %> </td>
+            <td> <%= item.amount %> </td>
+            <td> <%= link_to 'Edit', edit_item_path(item) %></td>
+        </tr>
+    <% end %>
+</table>

@@ -13,6 +13,7 @@ class UsersController < ApplicationController
     
     def create 
         @user = User.create(user_params)
+        Pantry.create(user_id: @user.id)
         if @user.id == nil
             redirect_to new_user_path
         else
