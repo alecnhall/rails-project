@@ -30,6 +30,11 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 # bootstrap
 gem 'bootstrap-sass', '3.3.7'
+gem 'bootstrap', '~> 4.4.1'
+gem 'sprockets-rails', :require => 'sprockets/railtie'
+gem 'jquery-rails'
+gem "bootstrap_form", "~> 4.0"
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

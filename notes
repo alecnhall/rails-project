@@ -6,18 +6,29 @@ What do I need to set up a user model?
 
 `rails g resource user username:string email:string password_digest:string --no-test-framework`
 
-controller actions
+user model
+- validates uniqueness and presence of email, username
+- has_secure_password
+- validates email format and downcases all emails entered
+- has_one :pantry
 
--log in 
+users controller actions
+
+-index 
+    - render 'login'
 -new
+    - instantiates new user instance for form_for 
 -create 
+    - if user is not created redirects to new user page
+    - if created it goes to user show page 
 -show 
-    - has_one :pantry 
-        - pantry 
-            - has_many :items 
-            - belongs_to :user 
-        - items
-            - belongs_to :pantry 
+    - pantry 
+        - has_many :items 
+        - belongs_to :user 
+    - items
+        - belongs_to :pantry 
+        - name
+        - quantity
     - creates recipe 
         - recipe
             - has_many :ingredients 
@@ -27,7 +38,16 @@ controller actions
 
 
 welcome controller w/ a home page 
+
+home 
 sessions controller
+- create
+    - find user 
+        - if it finds the user and authenticates the password 
+            - add user id to session
+            - redirect_to user_url(@user)
+
+- destroy
 
 So far I have created my welcome page and made sure that it is rendering in my layout. I have added links to my welcome page that give the user the option to sign in but they are undefined at this point so the view is not rendering.
 

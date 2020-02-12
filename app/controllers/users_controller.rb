@@ -1,6 +1,4 @@
 class UsersController < ApplicationController
-    # validates :username, uniqueness: true
-    # validates :email, uniqueness: true
     before_action :require_login
     before_action :set_user, only: [:show, :edit]
     skip_before_action :require_login, only: [:index, :new, :create]
