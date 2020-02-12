@@ -16,7 +16,9 @@ class ItemsController < ApplicationController
     end
 
     def update
-        @item = Item.update(item_params)
+        @item = Item.find(params[:id])
+        @item.update(item_params)
+        @item.save
         redirect_to user_path(current_user.id)
     end
 
