@@ -10,7 +10,7 @@ class RecipesController < ApplicationController
     end
 
     def create 
-      
+        @recipe = Recipe.create(recipe_params)
     end
 
     def edit
@@ -26,11 +26,12 @@ class RecipesController < ApplicationController
     def recipe_params
         params.require(:item).permit(
             :name,
-            :amount
+            :description,
+            recipe_ids:[]
         )
     end
 
     def set_recipe
-        @user = User.find(params[:id])
+        @recipe = Recipe.find(params[:id])
     end
 end
