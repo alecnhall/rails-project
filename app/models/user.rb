@@ -6,4 +6,5 @@ class User < ApplicationRecord
     before_save { self.email = email.downcase }
     has_one :pantry
     has_many :items, through: :pantry
+    has_many :recipes
 end

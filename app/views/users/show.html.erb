@@ -14,4 +14,14 @@
 
 <div>
 <h2> What Recipes Do You Have? </h2>
+<% if current_user.recipes.empty? %>
+    <h4> You haven't created any recipes yet. Create a recipe or look at other recipes! </h4>
+    <%= link_to 'Create A Recipe', new_user_recipe_url(current_user) %>
+<% else %>
+    <%= render 'recipes/recipes' %><br>
+    <br>
+    <%= link_to 'Create A New Recipe', new_user_recipe_url(current_user) %> <br>
+    <%= link_to 'View All Recipes', recipes_path %>
+<% end %>
+
 </div>
