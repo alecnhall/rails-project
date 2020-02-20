@@ -1,2 +1,0 @@
-class PantriesController < ApplicationRecord
-end

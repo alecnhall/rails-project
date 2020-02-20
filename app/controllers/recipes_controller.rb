@@ -1,9 +1,9 @@
 class RecipesController < ApplicationController
-    before_action :set_recipe, only: [:show, :edit, :update]
+    before_action :set_recipe, only: [:show, :edit, :update, :destroy]
 
     def index
         if params[:user_id]
-            @recipes = User.find(params[user_id]).posts
+            @recipes = User.find(params[user_id]).recipes
         else
             @recipes = Recipe.all 
         end
@@ -14,17 +14,22 @@ class RecipesController < ApplicationController
             redirect_to users_path, alert: "User not found."
           else
             @recipe = Recipe.new(user_id: params[:user_id])
+            @recipe.ingredients.build
+            @recipe.directions.build
           end
     end
 
     def create 
         @recipe = Recipe.create(recipe_params)
-        raise.recipe_params
-        @recipe.save
-        redirect_to user_recipe_path(@recipe, @recipe.user)
+        if @recipe.save
+            redirect_to user_recipe_path(@recipe.user, @recipe)
+        else 
+            redirect_to new_user_recipe_path(@recipe.user)
+        end
     end
 
     def show
+        
     end
 
     def edit
@@ -32,17 +37,25 @@ class RecipesController < ApplicationController
     end
 
     def update
-    
+        @recipe.update(recipe_params)
+        if @recipe.save
+            redirect_to user_recipe_path(@recipe.user, @recipe)
+        else 
+            redirect_to edit_user_recipe_path(@recipe)
+        end
+    end
+
+    def destroy
+        @recipe.destroy
+        redirect_to user_path(@recipe.user)
     end
 
     private
 
     def recipe_params
-        params.require(:recipe).permit(
-            :name,
-            :description,
-            :user_id,
-            ingredients_attributes:[:id, :name, :amount],
+        params.require(:recipe).permit(:name, :description, :user_id,
+            ingredients_attributes: [:name, :amount, :_destroy],
+            directions_attributes: [:step, :_destroy] 
         )
     end
 

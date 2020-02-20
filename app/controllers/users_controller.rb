@@ -22,12 +22,6 @@ class UsersController < ApplicationController
         end
     end
 
-    def edit
-    end
-
-    def show
-    end
-
     private 
     
     def user_params

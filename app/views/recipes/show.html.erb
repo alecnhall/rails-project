@@ -1,8 +1,18 @@
 <h1><%= @recipe.name %></h1>
 <p><%= @recipe.description %></p>
+<h3>Recipe Ingredients</h3>
 <ul>
     <% @recipe.ingredients.each do |ingredient| %>
-        <li><%= ingredient.name %></li>
+        <li><%= ingredient.name %> - <%= ingredient.amount %></li>
     <% end %>
 </ul>
-<%= link_to 'Edit Recipe', edit_user_recipe_path(@recipe, @recipe.user) %>
+<br>
+<h3>Recipe Instructions</h3>
+<ul>
+    <% @recipe.directions.each do |direction| %>
+        <li><%= direction.step %></li>
+    <% end %>
+</ul>
+
+<%= link_to 'Edit Recipe', edit_user_recipe_path(@recipe.user, @recipe) %>
+<%= link_to 'Delete Recipe', recipe_path, method: "delete"  %>

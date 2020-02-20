@@ -22,13 +22,29 @@
     <%= f.text_area :description %> <br>
     <br>
     <%= f.label :ingredients %> <br>
-    <%= f.fields_for :ingredients, @recipe.ingredients.build do |ingredients_fields| %>
-        <%= ingredients_fields.label :name %>
-        <%= ingredients_fields.text_field :name%> <br>
+    <%= f.add_nested_fields_link :ingredients %><br>
+    <%= f.nested_fields_for :ingredients do |ff| %>
+        <%= ff.label :name %>
+        <%= ff.text_field :name%> <br>
 
-        <%= ingredients_fields.label :amount %>
-        <%= ingredients_fields.text_field :name%> <br>
+        <%= ff.label :amount %>
+        <%= ff.text_field :amount %> <br>
+
+        <%= ff.remove_nested_fields_link %>
     <% end %>
+    <br>
+
+    <%= f.label :Directions %> <br>
+    <%= f.add_nested_fields_link :directions %><br>
+    <%= f.nested_fields_for :directions do |ff| %>
+        <%= ff.label :step %>
+        <%= ff.text_area :step %> <br>
+
+        <%= ff.remove_nested_fields_link %>
+    <% end %>
+    <br>
+    
+    
     <%= f.submit %>
 
 <% end %>
