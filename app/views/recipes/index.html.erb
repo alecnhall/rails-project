@@ -1,4 +1,9 @@
 <h1> All Recipes </h1>
+<%= form_tag("/recipes", method: "get") do %>
+ 
+  <%= select_tag "date", options_for_select(["Latest Recipes", "Legacy Recipes"]), include_blank: true %>
+  <%= submit_tag "Filter" %>
+<% end %>
 <ul>
     <% @recipes.each do |recipe| %>
         <li><%= link_to recipe.name, recipe_path(recipe) %>

@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_one :pantry
   has_many :items, through: :pantry
   has_many :recipes
+  
 
   after_save :create_and_associate_pantry
 

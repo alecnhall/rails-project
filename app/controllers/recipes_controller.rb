@@ -3,28 +3,31 @@ class RecipesController < ApplicationController
 
     def index
         if params[:user_id]
-            @recipes = User.find(params[user_id]).recipes   
+            @recipes = User.find(params[:user_id]).recipes  
+        elsif !params[:date].blank?
+            if params[:date] == "Latest Recipes"
+                @recipes = Recipe.latest
+            else
+                @recipes = Recipe.old
+            end
         else
             @recipes = Recipe.all 
         end
     end
 
     def new
-        if params[:user_id] && !User.exists?(params[:user_id])
-            redirect_to users_path, alert: "User not found."
-          else
-            @recipe = Recipe.new(user_id: params[:user_id])
-            @recipe.ingredients.build
-            @recipe.directions.build
-          end
+        @recipe = Recipe.new(user_id: params[:user_id])
+        3.times { @recipe.ingredients.build }
+        3.times { @recipe.directions.build }
     end
 
     def create 
-        @recipe = Recipe.create(recipe_params)
-        if @recipe.save
+        @recipe = Recipe.new(recipe_params)
+        if @recipe.valid?
+            @recipe.save
             redirect_to user_recipe_path(@recipe.user, @recipe)
         else 
-            redirect_to new_user_recipe_path(@recipe.user)
+            render :new
         end
     end
 

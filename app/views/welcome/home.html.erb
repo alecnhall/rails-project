@@ -22,6 +22,6 @@
         <%= render 'recipes/recipes' %><br>
         <br>
         <%= link_to 'Create A New Recipe', new_user_recipe_url(current_user) %> <br>
-        <%= link_to 'View All Recipes', recipes_path %>
+        <%= link_to 'View Your Recipes', user_recipes_path(current_user) %>
     <% end %>
 </div>
