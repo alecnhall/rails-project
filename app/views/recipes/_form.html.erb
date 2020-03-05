@@ -1,11 +1,18 @@
 <%= form_for @recipe do |f| %>
-
+    <% if @recipe.errors.any? %>
+        <div id="error_explanation">
+            <h3> There are errors: </h3>
+            <ul>
+                <% @recipe.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
 
     <%= f.hidden_field :user_id %>
-    <div class="field<%= ' field_with_errors' if @recipe.errors[:name].any? %>">
     <%= f.label :name %>
-    <%= f.text_field :name %><br>
-    </div>
+    <%= f.text_field :name %> <br>
     <%= f.label :description %>
     <%= f.text_area :description %> <br>
     <br>

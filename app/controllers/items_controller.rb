@@ -6,10 +6,14 @@ class ItemsController < ApplicationController
     end
 
     def create 
-        @item = Item.create(item_params)
+        @item = Item.new(item_params)
         @item.pantry_id = current_user.pantry.id
-        @item.save
-        redirect_to root_url
+        if @item.valid?
+            @item.save
+            redirect_to root_url
+        else
+            render :new
+        end
     end
 
     def edit
