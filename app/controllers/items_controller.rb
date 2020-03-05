@@ -8,7 +8,7 @@ class ItemsController < ApplicationController
         @item = Item.create(item_params)
         @item.pantry_id = current_user.pantry.id
         @item.save
-        redirect_to user_path(current_user.id)
+        redirect_to root_url
     end
 
     def edit
@@ -19,7 +19,7 @@ class ItemsController < ApplicationController
         @item = Item.find(params[:id])
         @item.update(item_params)
         @item.save
-        redirect_to user_path(current_user.id)
+        redirect_to root_url
     end
 
     private

@@ -1,3 +1,27 @@
-<h1>Welcome Recipe Matcher</h1>
-<p>With this application you can keep track of the food you have in your pantry as well as create recipes. You can then see what recipes you have available to make based on the food in your pantry.</p>
 
+    <h1 class="center"> Welcome, <%= current_user.email %>! </h1>
+
+    <h2> What's In Your Pantry? </h2>
+
+    <div>
+    <% if current_user.pantry.items.empty? %>
+        <h4> There are currently no items in your pantry. Click the link below to add items. </h4>
+        <%= link_to 'Add Items To Pantry', new_item_path %>
+    <% else %>
+        <%= render partial: 'pantry/pantry' %>
+        <%= link_to 'Add Items To Pantry', new_item_path %>
+    <% end %>
+    </div>
+
+    <div>
+    <h2> What Recipes Do You Have? </h2>
+    <% if current_user.recipes.empty? %>
+        <h4> You haven't created any recipes yet. Create a recipe or look at other recipes! </h4>
+        <%= link_to 'Create A Recipe', new_user_recipe_url(current_user) %>
+    <% else %>
+        <%= render 'recipes/recipes' %><br>
+        <br>
+        <%= link_to 'Create A New Recipe', new_user_recipe_url(current_user) %> <br>
+        <%= link_to 'View All Recipes', recipes_path %>
+    <% end %>
+</div>
