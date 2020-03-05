@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
-  resources :items, only: [:new, :create, :edit, :update]
+  resources :items, only: [:new, :create, :edit, :update, :destroy]
   resources :users do 
     resources :recipes, only: [:new, :create, :show, :edit, :update, :destory]
   end

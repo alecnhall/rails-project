@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+    before_action :set_item, only: [:edit, :update, :destroy]
 
     def new
         @item = Item.new
@@ -12,13 +13,17 @@ class ItemsController < ApplicationController
     end
 
     def edit
-        @item = Item.find(params[:id])
+    
     end
 
     def update
-        @item = Item.find(params[:id])
         @item.update(item_params)
         @item.save
+        redirect_to root_url
+    end
+
+    def destroy
+        @item.destroy
         redirect_to root_url
     end
 
@@ -29,5 +34,9 @@ class ItemsController < ApplicationController
             :name,
             :amount
         )
+    end
+
+    def set_item
+        @item = Item.find(params[:id])
     end
 end

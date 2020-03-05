@@ -3,7 +3,7 @@ class RecipesController < ApplicationController
 
     def index
         if params[:user_id]
-            @recipes = User.find(params[user_id]).recipes
+            @recipes = User.find(params[user_id]).recipes   
         else
             @recipes = Recipe.all 
         end
@@ -47,7 +47,7 @@ class RecipesController < ApplicationController
 
     def destroy
         @recipe.destroy
-        redirect_to user_path(@recipe.user)
+        redirect_to root_url
     end
 
     private

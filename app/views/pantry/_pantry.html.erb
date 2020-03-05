@@ -9,6 +9,7 @@
             <td> <%= item.name %> </td>
             <td> <%= item.amount %> </td>
             <td> <%= link_to 'Edit', edit_item_path(item) %></td>
+            <td> <%= link_to 'Delete', item_path(item), method: 'delete' %></td>
         </tr>
     <% end %>
 </table>
