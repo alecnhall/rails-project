@@ -1,0 +1,11 @@
+<%= form_tag ingredients_url, method: :get do %>
+    <label>Search Ingrediengts:</label><br>
+    <%= text_field_tag :name, params[:name] %><br><br>
+    <%= submit_tag "Search" %><br>
+<% end %>
+    <ul>
+        <% @recipes.each do |recipe| %>
+            <li><%= link_to recipe.name , recipe_path(recipe) %></li>
+        <% end %>
+    </ul>
+
