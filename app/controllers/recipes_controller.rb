@@ -10,6 +10,8 @@ class RecipesController < ApplicationController
             else
                 @recipes = Recipe.old
             end
+        elsif params[:name]
+            @recipes = Recipe.joins(:ingredients).where("ingredients.name LIKE ?", "#{params[:name]}")
         else
             @recipes = Recipe.all 
         end

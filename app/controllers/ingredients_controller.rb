@@ -5,6 +5,7 @@ class IngredientsController < ApplicationController
     else
       @recipes = Recipe.all
     end
+    render :recipes
   end
 end
 
